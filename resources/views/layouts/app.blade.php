@@ -14,14 +14,19 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+    <!-- Styles -->
+    @yield('styles')
+    @notifyCss
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a type="button" class="navbar-brand border border-secondary p-2 rounded" href="{{ url('/') }}" data-toggle="tooltip" data-placement="right" title="Kembali ke halaman Home">
+                    Home
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -55,6 +60,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('places.index') }}">List Place</a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -76,5 +83,10 @@
             @yield('content')
         </main>
     </div>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    @stack('scripts')
+    @notifyJs
+    <script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 </html>
